@@ -1,0 +1,44 @@
+- name: Install Tools on Ubuntu
+  hosts: ubuntu
+  become: true ## root 권한 부여
+  tasks:
+    - name: 'apt-get update'
+      apt:
+        update_cache: yes
+
+    - name: 'install nginx'
+      apt:
+        name: nginx
+        state: present
+        update_cache: true
+
+    - name: 'Ensure nginx service started'
+      service:
+        name: nginx
+        state: started
+
+    - name: 'Install Docker dependencies'
+      apt:
+        name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg', 'lsb-release']
+        state: present
+
+    - name: 'Add Docker GPG key'
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker APT repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+
+    - name: Run hello-world docker container
+      docker_container:
+        name: hello-world
+        image: hello-world
+        state: started

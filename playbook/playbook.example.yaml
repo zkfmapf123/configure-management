@@ -1,0 +1,13 @@
+## 1개의 playbook
+## 1개의 play
+## 2개의 task
+## 각 task 당, command 모듈을 사용
+
+- name: hello-world
+  hosts: localhost
+  tasks:
+    - name: 'Hello world'
+      command: echo "hello world"
+
+    - name: 'touch example file'
+      command: touch example.file
