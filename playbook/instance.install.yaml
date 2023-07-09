@@ -42,3 +42,6 @@
         name: hello-world
         image: hello-world
         state: started
+
+    - name: Change docker chmod 777
+      command: chmod 777 /var/run/docker.sock

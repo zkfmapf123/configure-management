@@ -106,3 +106,7 @@
   - name: "Task 2: Execute script"
     script: task2.sh
 ```
+
+## Reference
+
+- <a href="https://docs.ansible.com/ansible/latest/index.html"> Ansible Document </a>
