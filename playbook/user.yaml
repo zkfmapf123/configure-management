@@ -1,0 +1,56 @@
+- name: 'user info'
+  hosts: dev
+  become: true
+  # gather_facts: false
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: 'Create file'
+      file:
+        path: /home/ubuntu/info.txt
+        state: touch
+
+    ## loop use with_items
+    - name: 'Create groups'
+      group:
+        name: '{{ item }}'
+        state: 'present'
+      with_items:
+        - backend
+        - frontend
+        - devops
+
+    ## loop
+    - name: 'Create users'
+      user:
+        name: '{{ item }}'
+        comment: 'test'
+        state: 'present'
+      loop:
+        - leedonggyu
+        - limjeahyock
+        - kimboyun
+        - limjeahycok
+        - kimhyeonchoel
+
+    ## Debug
+    - name: 'Debug data'
+      debug:
+        msg: 'backend'
+
+    - name: 'Condition Debugging'
+      debug:
+        var: item
+
+      loop: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      when:
+        - item >= 5
+        - item <= 8
+
+    - name: 'Print users'
+      command: 'cur -d: -f1 /etc/passwd'
+      register: users
+
+    - name: 'Debug ansible facts'
+      debug:
+        var: ansible_facts

@@ -6,3 +6,6 @@ instance:
 
 module:
 	ansible-playbook -i inventory module.example.yaml
+
+user:
+	ansible-playbook -i inventory user.yaml --check

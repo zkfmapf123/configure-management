@@ -112,6 +112,36 @@
 - 특정 Task A가 실행되면 Task B가 실행되게끔 진행 (이벤트 기반...)
 - nginx 같은 webserver에서 서버의 변경이 일어날때...
 
+> variable
+
+- python의 지시어(예약어)를 사용할수는 없음
+- playbook의 지시어(얘약어)를 사용할 수 없음
+- vars.yaml 참조
+
+```yaml
+## use jinja2 syntax
+ansible.builtin.template:
+  src: foo.cfg.j2
+  dest: '{{ remote_install_path }}/foo/cfg'
+```
+
+> Facts
+
+- Ansible은 각 단계의 Task를 Facts로 수집한다.
+- 다만 Facts자체를 수집하기때문에 성능이 저하될 수 있다.
+- 실험적인 단계나, 성능향상을 위해서 Fact를 false로 지정할 수 있다.
+  ```
+    - name: 'user info'
+      hosts: dev
+      become: true
+      gather_facts: false
+      vars_files:
+  ```
+- ansible 자체는 python모듈이 설치가 돼야하는데 -> Container 환경에서는 python모듈이 존재하지 않기때문에 prepare module만 사용해야 한다. (실험적인 환경)
+  ```
+    command, shell, raw
+  ```
+
 ## Reference
 
 - <a href="https://docs.ansible.com/ansible/latest/index.html"> Ansible Document </a>
