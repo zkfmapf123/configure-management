@@ -107,6 +107,11 @@
     script: task2.sh
 ```
 
+> handler
+
+- 특정 Task A가 실행되면 Task B가 실행되게끔 진행 (이벤트 기반...)
+- nginx 같은 webserver에서 서버의 변경이 일어날때...
+
 ## Reference
 
 - <a href="https://docs.ansible.com/ansible/latest/index.html"> Ansible Document </a>
